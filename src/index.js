@@ -1,9 +1,7 @@
-console.log("Synora application started");
+const app = require("./app");
 
-const shutdown = (signal) => {
-  console.log(`Synora application shutting down: ${signal}`);
-  process.exit(0);
-};
+const port = process.env.PORT || 3000;
 
-process.on("SIGINT", () => shutdown("SIGINT"));
-process.on("SIGTERM", () => shutdown("SIGTERM"));
+app.listen(port, () => {
+  console.log(`Synora running on port ${port}`);
+});
