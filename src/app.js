@@ -1,10 +1,10 @@
 const express = require("express");
 
-const healthRouter = require("./routes/health.routes");
+const router = require("./routes");
 
 const app = express();
 
-app.use(healthRouter);
+app.use(router);
 
 app.use((error, req, res, next) => {
   console.error(error);
