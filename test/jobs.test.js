@@ -56,4 +56,15 @@ describe("Job API", () => {
       error: "Job name must be a non-empty string",
     });
   });
+
+  test("rejects a job submission with a blank name", async () => {
+    const response = await request(app).post("/jobs").send({
+      name: "   ",
+    });
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({
+      error: "Job name must be a non-empty string",
+    });
+  });
 });
