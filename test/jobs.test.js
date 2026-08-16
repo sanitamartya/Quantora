@@ -18,4 +18,22 @@ describe("Job API", () => {
       name: "example-job",
     });
   });
+
+  test("assigns a unique identity to each job submission", async () => {
+    const firstResponse = await request(app).post("/jobs").send({
+      name: "first-job",
+    });
+
+    const secondResponse = await request(app).post("/jobs").send({
+      name: "second-job",
+    });
+
+    expect(firstResponse.status).toBe(202);
+    expect(secondResponse.status).toBe(202);
+
+    expect(firstResponse.body.id).toEqual(expect.any(String));
+    expect(secondResponse.body.id).toEqual(expect.any(String));
+
+    expect(firstResponse.body.id).not.toBe(secondResponse.body.id);
+  });
 });
