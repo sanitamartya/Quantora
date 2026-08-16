@@ -14,6 +14,7 @@ describe("Job API", () => {
     expect(response.status).toBe(202);
     expect(response.headers["content-type"]).toMatch(/json/);
     expect(response.body).toEqual({
+      id: expect.any(String),
       name: "example-job",
     });
   });
