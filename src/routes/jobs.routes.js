@@ -4,9 +4,9 @@ const { randomUUID } = require("node:crypto");
 const router = express.Router();
 
 router.post("/jobs", (req, res) => {
-  if (!req.body.name) {
+  if (typeof req.body.name !== "string" || req.body.name.length === 0) {
     return res.status(400).json({
-      error: "Job name is required",
+      error: "Job name must be a non-empty string",
     });
   }
 
