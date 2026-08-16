@@ -36,4 +36,12 @@ describe("Job API", () => {
 
     expect(firstResponse.body.id).not.toBe(secondResponse.body.id);
   });
+  test("rejects a job submission without a name", async () => {
+    const response = await request(app).post("/jobs").send({});
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({
+      error: "Job name is required",
+    });
+  });
 });
