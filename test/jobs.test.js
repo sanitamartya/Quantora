@@ -67,4 +67,16 @@ describe("Job API", () => {
       error: "Job name must be a non-empty string",
     });
   });
+
+  test("rejects malformed JSON", async () => {
+    const response = await request(app)
+      .post("/jobs")
+      .set("Content-Type", "application/json")
+      .send('{"name":"example-job"');
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({
+      error: "Invalid JSON",
+    });
+  });
 });
